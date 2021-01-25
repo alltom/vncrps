@@ -15,12 +15,14 @@ import (
 
 const maxFPS = 20
 
+var addr = flag.String("addr", "127.0.0.1:5900", "Address to listen for connections on.")
+
 func main() {
 	flag.Parse()
 
 	gameServer := NewGameServer(time.Now)
 
-	ln, err := net.Listen("tcp", "127.0.0.1:5900")
+	ln, err := net.Listen("tcp", *addr)
 	if err != nil {
 		log.Fatalf("couldn't listen: %v", err)
 	}
